@@ -1,0 +1,37 @@
+from bs4 import BeautifulSoup
+import re
+
+class WikiSoupParser(object):
+
+    def __init__(self):
+        self.page = None
+
+    def parse(self, html):
+        self.page = BeautifulSoup(html, 'html.parser')
+
+    def extractLinks(self):
+        body = self.page.find('div', attrs={ 'class':'mw-parser-output' }) # Only concerned with links in the body
+        links = []
+        for child in body.findChildren():
+            if child.find('div', attrs={ 'class': 'mw-references-wrap'}) != None:
+                break
+
+            child_links = child.findAll('a')
+            for link in child_links:
+                links.append(link.get('href'))
+
+        links = self._dedup_link_list(links)
+        links = self._wiki_only(links)
+        print(links)
+
+    def _dedup_link_list(self, links):
+        link_dict = {}
+        for link in links:
+            link_dict[link] = 1
+        return list(link_dict.keys())
+
+    def _wiki_only(self, links):
+        links = [x for x in links if re.match('^/wiki/', x)]
+        links = [x for x in links if not re.match('.*:.*', x)]
+        return links
+
