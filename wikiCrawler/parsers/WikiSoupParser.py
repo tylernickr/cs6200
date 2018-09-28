@@ -20,9 +20,11 @@ class WikiSoupParser(object):
             for link in child_links:
                 links.append(link.get('href'))
 
+        links = self._remove_same_page_segments(links)
         links = self._dedup_link_list(links)
         links = self._wiki_only(links)
-        print(links)
+        
+        return links
 
     def _dedup_link_list(self, links):
         link_dict = {}
@@ -34,4 +36,14 @@ class WikiSoupParser(object):
         links = [x for x in links if re.match('^/wiki/', x)]
         links = [x for x in links if not re.match('.*:.*', x)]
         return links
+
+    def _remove_same_page_segments(self, links):
+        results = []
+        for link in links:
+            try:
+                results.append(link[:link.index('#')])
+            except ValueError as e:
+                results.append(link)
+
+        return results
 

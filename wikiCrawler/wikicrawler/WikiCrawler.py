@@ -14,6 +14,9 @@ class WikiCrawler(object):
     def set_parser(self, parser):
         self.parser = parser
 
+    def set_frontier_manager(self, frontier_manager):
+        self.frontier_manager = frontier_manager
+
     def crawl(self, seed_url, max_depth):
         seed_url = WikiCrawler.ROOT_URL + seed_url
         self.todo_list = [(seed_url, self.current_depth)]
