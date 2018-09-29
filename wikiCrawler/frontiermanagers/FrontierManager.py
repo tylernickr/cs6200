@@ -6,12 +6,18 @@ class FrontierManager(object):
         self.visited = []
 
     def add(self, link, depth):
-        if (not link in self.to_visit and not link in self.visited):
-            self.to_visit.append(link, depth)
+        for v_link, v_depth in self.visited:
+            if v_link == link:
+                return
+        for tv_link, tv_depth in self.to_visit:
+            if tv_link == link:
+                return
+        self.to_visit.append((link, depth))
 
     def next(self):
         next_item = self.to_visit[0]
         self.to_visit = self.to_visit[1:]
+        self.visited.append(next_item)
         return next_item
 
     def has_next(self):

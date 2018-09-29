@@ -18,12 +18,14 @@ class WikiSoupParser(object):
 
             child_links = child.findAll('a')
             for link in child_links:
-                links.append(link.get('href'))
+                url = link.get('href')
+                if url:
+                    links.append(url)
 
         links = self._remove_same_page_segments(links)
         links = self._dedup_link_list(links)
         links = self._wiki_only(links)
-        
+
         return links
 
     def _dedup_link_list(self, links):
