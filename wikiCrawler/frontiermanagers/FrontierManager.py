@@ -18,6 +18,7 @@ class FrontierManager(object):
         next_item = self.to_visit[0]
         self.to_visit = self.to_visit[1:]
         self.visited.append(next_item)
+        print("Size of todo: " + str(len(self.to_visit)))
         return next_item
 
     def has_next(self):
