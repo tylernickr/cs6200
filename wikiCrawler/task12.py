@@ -14,21 +14,21 @@ if __name__ == '__main__':
     crawler.set_frontier_manager(fm.FrontierManager())
     crawler.set_storage_manager(sm.StorageManager(OUTPUT_DIR))
     crawler.set_relevance_engine(rev.RelevanceEngine(DICT_LOC, []))
-    crawler.crawl('/wiki/Time_zone', 6, 10)
+    crawler.crawl('/wiki/Time_zone', 6, 1000)
 
     crawler2 = wc.WikiCrawler(DELAY_SECONDS)
     crawler2.set_parser(ps.WikiSoupParser())
     crawler2.set_frontier_manager(fm.FrontierManager())
     crawler2.set_storage_manager(sm.StorageManager(OUTPUT_DIR))
     crawler2.set_relevance_engine(rev.RelevanceEngine(DICT_LOC, []))
-    crawler2.crawl('/wiki/Electric_car', 6, 10)
+    crawler2.crawl('/wiki/Electric_car', 6, 1000)
 
     crawler3 = wc.WikiCrawler(DELAY_SECONDS)
     crawler3.set_parser(ps.WikiSoupParser())
     crawler3.set_frontier_manager(fm.FrontierManager())
     crawler3.set_storage_manager(sm.StorageManager(OUTPUT_DIR))
     crawler3.set_relevance_engine(rev.RelevanceEngine(DICT_LOC, []))
-    crawler3.crawl('/wiki/Carbon_footprint', 6, 10)
+    crawler3.crawl('/wiki/Carbon_footprint', 6, 1000)
 
     myjournal = lj.LinkJournal()
 
