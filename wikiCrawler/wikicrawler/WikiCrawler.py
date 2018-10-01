@@ -39,12 +39,12 @@ class WikiCrawler(object):
             self.last_crawl = time()
             url_to_crawl, url_depth, dist_ft = self.frontier_manager.next()
             url_to_crawl = WikiCrawler.ROOT_URL + url_to_crawl
-            self.link_journal.add(url_to_crawl, url_depth, dist_ft)
             self.current_depth = url_depth
 
             # Handle the depth constraint
             if self.current_depth > max_depth:
                 return
+            self.link_journal.add(url_to_crawl, url_depth, dist_ft)
             response = get(url_to_crawl)
             self.process_response(url_to_crawl, response)
             self.pages_crawled += 1

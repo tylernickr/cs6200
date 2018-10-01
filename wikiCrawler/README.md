@@ -28,3 +28,9 @@ run "python setup[12|3].py install" depending on which task you want to run.
 References used:
 
 - BeautifulSoup was used to suppliment the parser object in the codebase
+
+MAXIMUM DEPTHS FOR EACH TASK:
+
+- Task 1: 3
+- Task 2: 3
+- Task 3: 6 (Reached the max)
