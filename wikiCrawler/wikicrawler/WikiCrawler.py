@@ -13,20 +13,26 @@ class WikiCrawler(object):
         self.pages_crawled = 0
         self.link_journal = LinkJournal()
 
+    # For managing parsing
     def set_parser(self, parser):
         self.parser = parser
 
+    # For managing the frontier
     def set_frontier_manager(self, frontier_manager):
         self.frontier_manager = frontier_manager
 
+    # For managing storing the files (Turned off right now)
     def set_storage_manager(self, storage_manager):
         self.storage_manager = storage_manager
 
+    # Set logic class for determining if something is relevant
     def set_relevance_engine(self, relevence_engine):
         self.relevence_engine = relevence_engine
 
     def crawl(self, seed_url, max_depth, max_pages):
         self.frontier_manager.add(seed_url, self.current_depth, 0)
+
+        #Crawl intil we reach one of our limiting constraints or we run out of links
         while (self.frontier_manager.has_next() and self.link_journal.size() < max_pages):
             if time() - self.last_crawl < self.delay:
                 continue
@@ -35,6 +41,8 @@ class WikiCrawler(object):
             url_to_crawl = WikiCrawler.ROOT_URL + url_to_crawl
             self.link_journal.add(url_to_crawl, url_depth, dist_ft)
             self.current_depth = url_depth
+
+            # Handle the depth constraint
             if self.current_depth > max_depth:
                 return
             response = get(url_to_crawl)

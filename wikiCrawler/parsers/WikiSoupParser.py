@@ -13,6 +13,7 @@ class WikiSoupParser(object):
         body = self.page.find('div', attrs={ 'class':'mw-parser-output' }) # Only concerned with links in the body
         links = []
         for child in body.findChildren():
+            # This is the content section of the page, get all the blocks
             if child.find('div', attrs={ 'class': 'mw-references-wrap'}) != None:
                 break
 
@@ -23,10 +24,10 @@ class WikiSoupParser(object):
                 url_text = link.string
                 if url_text == None:
                     url_text = ''
-                for parent in link.parents:
+                for parent in link.parents:  # Now check how far from title we are
                     dist_from_title += 1
                     try:
-                        if parent['id'] == 'bodyContent':
+                        if parent['id'] == 'bodyContent':  # Same level as title
                             break
                     except KeyError:
                         pass

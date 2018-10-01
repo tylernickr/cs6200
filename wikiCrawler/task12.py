@@ -9,6 +9,7 @@ DICT_LOC = './resource/words.txt'
 OUTPUT_DIR = './output_files/'
 
 if __name__ == '__main__':
+    # First link in task 1
     crawler = wc.WikiCrawler(DELAY_SECONDS)
     crawler.set_parser(ps.WikiSoupParser())
     crawler.set_frontier_manager(fm.FrontierManager())
@@ -16,6 +17,7 @@ if __name__ == '__main__':
     crawler.set_relevance_engine(rev.RelevanceEngine(DICT_LOC, []))
     crawler.crawl('/wiki/Time_zone', 6, 1000)
 
+    # 2nd link in task 1
     crawler2 = wc.WikiCrawler(DELAY_SECONDS)
     crawler2.set_parser(ps.WikiSoupParser())
     crawler2.set_frontier_manager(fm.FrontierManager())
@@ -23,6 +25,7 @@ if __name__ == '__main__':
     crawler2.set_relevance_engine(rev.RelevanceEngine(DICT_LOC, []))
     crawler2.crawl('/wiki/Electric_car', 6, 1000)
 
+    # 3rd link in task 1
     crawler3 = wc.WikiCrawler(DELAY_SECONDS)
     crawler3.set_parser(ps.WikiSoupParser())
     crawler3.set_frontier_manager(fm.FrontierManager())
@@ -42,6 +45,10 @@ if __name__ == '__main__':
         file2.write("URL\tDepth\tTitleCloseness\n")
         file3.write("URL\tDepth\tTitleCloseness\n")
         file4.write("URL\tDepth\tTitleCloseness\n")
+
+        # Write to each of the first three files
+        # Add the links we write to the journal, which will
+        # take care of the merging and sorting
         for item in crawler.get_crawled_list():
             file1.write(item[0] + '\t\t' + str(item[1]) + '\t\t' + str(item[2]) + '\n')
             myjournal.add(item[0], item[1], item[2])

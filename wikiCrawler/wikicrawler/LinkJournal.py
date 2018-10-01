@@ -1,4 +1,6 @@
 
+# This class handles merging and ordering importance of links
+# Takes in all the links and sorts them during the get method
 class LinkJournal(object):
 
     def __init__(self):
