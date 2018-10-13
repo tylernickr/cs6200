@@ -1,5 +1,5 @@
 from wikiCrawler.wikicrawler import WikiCrawler as wc, LinkJournal as lj
-from wikiCrawler.parsers import WikiSoupParser as ps
+from lib.parsers import WikiSoupParser as ps
 from wikiCrawler.frontiermanagers import FrontierManager as fm
 from wikiCrawler.storagemanagers import StorageManager as sm
 from wikiCrawler.relevengines import RelevanceEngine as rev
